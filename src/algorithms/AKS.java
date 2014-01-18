@@ -102,6 +102,8 @@ public class AKS {
             
             // For i = 1 to sqrt(totient)log(n) do
             // if (X+i)^n <> X^n + i (mod X^r - 1,n), z³o¿ona - najbardziej czasochlonny krok;
+            
+            //ew tutaj dodac wypisywanie wielomianow, ale nie wiem czy nie zbede
 
             // sqrt(totient)log(n)
             long to = (long) Math.floor((Math.sqrt(MathFunctions.totient(r).doubleValue()) * MathFunctions.log(n)));
