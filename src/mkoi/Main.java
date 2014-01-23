@@ -10,7 +10,7 @@ public class Main
 
 
 	
-	 public static void main(String[] args)
+	 /*public static void main(String[] args)
 	 {
 		 SSLogger ssLogger = new SSLogger(Logger.CONSOLE_MODE);
 		 AKSLogger aksLogger = new AKSLogger(Logger.CONSOLE_MODE);
@@ -32,5 +32,5 @@ public class Main
 			
 		 //ans = ss.isPrime(new BigInteger("36653"), 30);
 		 //	ans = ss.isPrime(new BigInteger("971034308087215866439841492479664676774419087718205580112757800346489383481"), 30);
-	}
+	}*/
 }
