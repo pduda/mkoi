@@ -6,13 +6,13 @@ import java.util.Random;
 public class MathFunctions {
 
 	/***
-	 *  Funkcja oblicza symbol Jakobiego dla liczb a,n. Symbol Jakobiego jest uogólnieniem symbolu Lagendre'a
-	 * Zwraca -1, 0, 1 w zale¿noœci od zadanych parametrów. Do obliczeñ wykorzystywana jest klasa BigInteger
+	 *  Funkcja oblicza symbol Jakobiego dla liczb a,n. Symbol Jakobiego jest uogolnieniem symbolu Lagendre'a
+	 * Zwraca -1, 0, 1 w zaleznosci od zadanych parametrow. Do obliczen wykorzystywana jest klasa BigInteger
 	 * 
 	 * @param  a	parametr a symbolu Jakobiego
 	 * @param  n	parametr n symbolu Jakobiego (nieparzysty, n > 2)
 	 * @param verbose tryb verbose
-	 * @return      wartoœæ funkcji 
+	 * @return      wartosc funkcji 
 	 */
 	static BigInteger calculateJacobian(BigInteger a,BigInteger n, boolean verbose){
 		
@@ -20,7 +20,7 @@ public class MathFunctions {
 	   BigInteger temp;
 	   
 	   /*
-	    * W³aœciwoœæ: 1) (0/n) = 0 
+	    * Wlasciwosci: 1) (0/n) = 0 
 	    */
 
 	   if(a.equals(BigInteger.ZERO)) 
@@ -28,8 +28,8 @@ public class MathFunctions {
 	   
 	
 	   /*
-	    * W³aœciwoœæ: 2) (a/n) = (-a/n)*(-1/n)
-	    * W³aœciwoœæ: 3) (-1/n) = -1 if n = 3 ( mod 4 )
+	    * Wlasciwosci: 2) (a/n) = (-a/n)*(-1/n)
+	    * Wlasciwosci: 3) (-1/n) = -1 if n = 3 ( mod 4 )
 	    */
 	   
 	   if(a.compareTo(BigInteger.ZERO) < 0)
@@ -41,7 +41,7 @@ public class MathFunctions {
 	   }
 	   
 	   /*
-	    * W³aœciwoœæ: 4) (1/n) = 1 
+	    * Wlasciwosci: 4) (1/n) = 1 
 	    */
 	    
 	   if(a.equals(BigInteger.ONE)) 
@@ -55,7 +55,7 @@ public class MathFunctions {
 	            a=a.negate();   
 	            
 	            /*
-		     	* W³aœciwoœæ: 5) (-1/n) = -1 if n = 3 (mod 4)
+		     	* Wlasciwosci: 5) (-1/n) = -1 if n = 3 (mod 4)
 		     	*/
 	          
 	            if(bigIntegerMod(n,4).equals(BigInteger.valueOf(3))) 
@@ -66,7 +66,7 @@ public class MathFunctions {
 	            a=a.divide(BigInteger.valueOf(2));
 	            
 	            /*
-	     	    * W³aœciwoœæ: 5) (2/n) = -1 if n = 3 ( mod 8 ) lub n = 5 (mod 8)
+	     	    * Wlasciwosci: 5) (2/n) = -1 if n = 3 ( mod 8 ) lub n = 5 (mod 8)
 	     	    */
 	            
 	            if(	bigIntegerMod(n,8).equals(BigInteger.valueOf(3)) ||
@@ -79,7 +79,7 @@ public class MathFunctions {
 	        }
 		   
 		   /*
-     	    * Quadratic reciprocity - wzajemnoœæ reszt kwadratowych, jeœli a,n = 3 ( mod 4 ) 
+     	    * Quadratic reciprocity - wzajemnosc reszt kwadratowych, jesli a,n = 3 ( mod 4 ) 
      	    */
 		   		   
 	        temp = n;
@@ -115,11 +115,11 @@ public class MathFunctions {
 	}
 	
 	/***
-	 * Funkcja obliczaj¹ca modulo dla klasy BigInteger
+	 * Funkcja obliczajaca modulo dla klasy BigInteger
 	 * 
 	 * @param a liczba do operacji modulo
 	 * @param b parametrf funkcji modulo 
-	 * @return  BigInteger reprezentujacy liczbê a%b
+	 * @return  BigInteger reprezentujacy liczbï¿½ a%b
 	 */
 
 	
@@ -130,13 +130,13 @@ public class MathFunctions {
 	}
 
 	/***
-	 * Funkcja oblicza symbol Jakobiego dla liczb a,n. Symbol Jakobiego jest uogólnieniem symbolu Lagendre'a
-	 * Zwraca -1, 0, 1 w zale¿noœci od zadanych parametrów. Do obliczeñ wykorzystywana jest klasa BigInteger
+	 * Funkcja oblicza symbol Jakobiego dla liczb a,n. Symbol Jakobiego jest uogolnieniem symbolu Lagendre'a
+	 * Zwraca -1, 0, 1 w zaleznosci od zadanych parametrow. Do obliczen wykorzystywana jest klasa BigInteger
 	 * 
 	 * @param  a	parametr a symbolu Jakobiego
 	 * @param  n	parametr n symbolu Jakobiego (nieparzysty, n > 2)
 	 * @param verbose tryb verbose
-	 * @return      wartoœæ funkcji 
+	 * @return      wartosc funkcji 
 	 */
 	
 	static int calculateJacobian(int a, int n, boolean verbose){
@@ -159,32 +159,32 @@ public class MathFunctions {
      * http://community.topcoder.com/tc?module=Static&d1=tutorials&d2=primeNumbers
      * 
      * @param r BigInteger argument funkcji
-     * @return phi(r) funkcja zwraca wartoœæ mówi¹c¹ ile jest liczb pierwszych nie wiêkszych od argumentów
+     * @return phi(r) funkcja zwraca wartosc mowiace ile jest liczb pierwszych nie wiekszych od argumentow
      */
 	public static BigInteger totient(BigInteger n) 
-{ 
-    BigInteger result = n; 
-  
-    for( BigInteger i = BigInteger.valueOf(2); n.compareTo(i.multiply(i)) > 0; i = i.add(BigInteger.ONE) ) 
-    { 
-            if (n.mod(i).compareTo(BigInteger.ZERO) == 0) 
-                    result = result.subtract(result.divide(i));
-            
-            while (n.mod(i).compareTo(BigInteger.ZERO) == 0)
-                    n = n.divide(i); 
-    }
-    
-    if (n.compareTo(BigInteger.ONE) > 0) 
-            result = result.subtract(result.divide(n));
-    
-    return result;
-}
+	{ 
+	    BigInteger result = n; 
+	  
+	    for( BigInteger i = BigInteger.valueOf(2); n.compareTo(i.multiply(i)) > 0; i = i.add(BigInteger.ONE) ) 
+	    { 
+	            if (n.mod(i).compareTo(BigInteger.ZERO) == 0) 
+	                    result = result.subtract(result.divide(i));
+	            
+	            while (n.mod(i).compareTo(BigInteger.ZERO) == 0)
+	                    n = n.divide(i); 
+	    }
+	    
+	    if (n.compareTo(BigInteger.ONE) > 0) 
+	            result = result.subtract(result.divide(n));
+	    
+	    return result;
+	}
 	
 	    
 	    /**
-	     * Loagrytm o podstawie 2 dla du¿ych liczb
+	     * Loagrytm o podstawie 2 dla duzych liczb
 	     * http://world.std.com/~reinhold/BigNumCalcSource/BigNumCalc.java
-	     * @param n BigInteger reprezentuj¹cy liczbê do zlogarytmowania
+	     * @param n BigInteger reprezentujacy liczby do zlogarytmowania
 	     * @return
 	     */
 	public static double log(BigInteger n)
@@ -204,8 +204,8 @@ public class MathFunctions {
 	    /***
 	     * Funkcja liczy (ang. multiplicative order) dla zadanej liczby
 	     * http://www.answers.com/topic/multiplicative-order
-	     * @param r jakie modulo ma byæ u¿yte
-	     * @return wartoœæ rzêdu mno¿enia lub -1 jeœli brak
+	     * @param r jakie modulo ma byc uzyte
+	     * @return wartosc rzedu mnozenia lub -1 jesli brak
 	     */
 	   public static BigInteger mOrder(BigInteger n, BigInteger r, boolean verbose)
 	    {
@@ -231,10 +231,10 @@ public class MathFunctions {
 
 	   
 		/***
-		 * Funkcja konwertuj¹ca liczbê do BigInteger
+		 * Funkcja konwertujaca liczby do BigInteger
 		 * 
 		 * @param  a liczba do konwersji
-		 * @return  BigInteger reprezentujacy liczbê a
+		 * @return  BigInteger reprezentujacy liczbe a
 		 */
 
 		public static BigInteger toBigInteger(long a){
@@ -242,10 +242,10 @@ public class MathFunctions {
 		}
 		
 		 	/***
-			 * Funkcja zwraca losow¹ wartoœæ BigInteger z przedzia³u [2,n-2]
+			 * Funkcja zwraca losowa wartosc BigInteger z przedzialu [2,n-2]
 			 * 
-			 * @param  uplimit	górny limit
-			 * @return  BigInteger reprezentujacy wartoœæ z przedzia³u [2,n-2]
+			 * @param  uplimit	gorny limit
+			 * @return  BigInteger reprezentujacy wartosc z przedzialu [2,n-2]
 			 */
 		
 		public static BigInteger getRandomBigInteger(BigInteger uplimit) {
