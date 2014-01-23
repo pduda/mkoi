@@ -12,9 +12,7 @@ import nuim.cs.crypto.polynomial.big.field.BigFieldPolynomial;
 public class AKS {
 	
 
-    static boolean verbose = true;
-  
-    
+    boolean verbose = true;
     boolean isprime;
     boolean notifyListeners = false;
     BigInteger podstawa;
@@ -28,6 +26,7 @@ public class AKS {
     {
     	this.listener = listener;
     	this.notifyListeners=true;
+    	this.verbose=false;
     }
     
     /***
@@ -65,11 +64,11 @@ public class AKS {
                     
                     if( comp_result == 0 )
                     {
-                            if (verbose) { System.out.println(n + " jest potega liczby calkowitej " + a); }
+                            if (this.verbose) { System.out.println(n + " jest potega liczby calkowitej " + a); }
                             if (notifyListeners) 
                             {
-                            	this.listener.isPrime(false);
                             	this.listener.powerOfInteger(a,power);
+                            	this.listener.isPrime(false);
                             }
                             
                             podstawa = a;
@@ -77,13 +76,13 @@ public class AKS {
                             return isprime;
                     }
                     
-                    if (verbose) { System.out.println(n + " nie jest potega liczby calkowitej " + a); }
+                    if (this.verbose) { System.out.println(n + " nie jest potega liczby calkowitej " + a); }
                     if (notifyListeners) this.listener.isNotPowerOfInteger(a);
                     
                     a = a.add(BigInteger.ONE);
             }
             while (a.pow(2).compareTo(n) <= 0); // nie ma sensu jesli kwadrat > n
-            if (verbose) { System.out.println(n + " nie jest potega zadnej liczby calkowitej mniejszej niz swoj kwadrat"); }
+            if (this.verbose) { System.out.println(n + " nie jest potega zadnej liczby calkowitej mniejszej niz swoj kwadrat"); }
             
            //znajdz takie r, ze o_r(n) > log^2 (n) -> o_r(*) - porzadek multiplikatywny
             double logSquared = MathFunctions.log(n)*MathFunctions.log(n);
@@ -93,20 +92,20 @@ public class AKS {
             BigInteger r = BigInteger.ONE;
             do
             {
-            	if (verbose) { System.out.println("Porzadek multiplikatywny:"); }
+            	if (this.verbose) { System.out.println("Porzadek multiplikatywny:"); }
                     r = r.add(BigInteger.ONE);
-                    m = MathFunctions.mOrder(n,r,verbose);
+                    m = MathFunctions.mOrder(n,r,this.verbose);
                 	
             }
             while( m.doubleValue() < logSquared );
-            if (verbose) { System.out.println("r = " + r); }
+            if (this.verbose) { System.out.println("r = " + r); }
             if (notifyListeners) this.listener.properRParamFound(r);
             
             // jesli 1 < (a,n) < n dla pewnych a <= r, zlozona, przy czym (a,n) - wzgledna pierwszosc (NWD(a,n) = 1)
             for( BigInteger i = BigInteger.valueOf(2); i.compareTo(r) <= 0; i = i.add(BigInteger.ONE) )
             {
                     BigInteger nwd = n.gcd(i);
-                    if (verbose) { System.out.println("NWD(" + n + "," + i + ") = " + nwd); }
+                    if (this.verbose) { System.out.println("NWD(" + n + "," + i + ") = " + nwd); }
                     
                     if ( nwd.compareTo(BigInteger.ONE) > 0 && nwd.compareTo(n) < 0 )
                     {
@@ -175,7 +174,7 @@ public class AKS {
                         return isprime;
                     }
                   
-                    if (verbose) { System.out.println(equation+"- warunek wielomianowy nie spelniony"); } 
+                    if (this.verbose) { System.out.println(equation+"- warunek wielomianowy nie spelniony"); } 
                 
                 } 
                 catch (PolynomialException e) 

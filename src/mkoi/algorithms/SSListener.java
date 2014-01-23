@@ -44,7 +44,7 @@ public interface SSListener
 	/**
 	 * Funkcja pozwalajaca poinformowac listener, ze parametr r jest rozny od wyliczonego jakobianu
 	 */
-	public void RNotEqualJacobianModeN();
+	public void RNotEqualJacobianModN();
 	
 	/**
 	 * Funkcja pozwalajaca poinformowac listener, ze parametr r jest rozny 1 i n-1, gdzie n jest badana liczba

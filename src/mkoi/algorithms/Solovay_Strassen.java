@@ -35,7 +35,7 @@ public class Solovay_Strassen
 	 * @param  iteration 	liczba iteracji testu
 	 * @return      czy pierwsza 
 	 */
-	boolean isPrime(BigInteger prime, int iteration)
+	public boolean isPrime(BigInteger prime, int iteration)
 	{
 		if(this.notifyListener)
 			this.listener.setNumber(prime);
@@ -44,7 +44,7 @@ public class Solovay_Strassen
 	    {
 	    	if(this.notifyListener)
 	    	{
-				this.listener.setNumber(prime);
+	    		this.listener.isPrime(false);
 	    	}
 	    	isprime = false;
 	    	return isprime;
@@ -55,7 +55,7 @@ public class Solovay_Strassen
 	    	if(this.notifyListener)
 	    	{
 	    		this.listener.isEvenNumber();
-				this.listener.setNumber(prime);
+				this.listener.isPrime(false);
 	    	}
 	    	isprime = false;
 	    	return isprime;
@@ -65,14 +65,14 @@ public class Solovay_Strassen
 	    {
 	    	BigInteger a = MathFunctions.getRandomBigInteger(prime);
 	    	
-	    	if (verbose) {System.out.println("Test dla a=" + a); }
+	    	if (this.verbose) {System.out.println("Test dla a=" + a); }
 	    	
 	        
 	        BigInteger temp = (prime.subtract(BigInteger.ONE)).divide(MathFunctions.toBigInteger(2));
 	        
 	        BigInteger r = a.modPow(temp,prime);
 	        
-	        if (verbose) {System.out.println("r = " + r);}
+	        if (this.verbose) {System.out.println("r = " + r);}
 
 	        if(!r.equals(BigInteger.ONE))
 	        {
@@ -89,7 +89,7 @@ public class Solovay_Strassen
 	        	}
 	        }
 	        
-	        BigInteger jacobianSymbol = MathFunctions.calculateJacobian(a,prime, verbose);
+	        BigInteger jacobianSymbol = MathFunctions.calculateJacobian(a,prime, this.verbose);
 	        
 	        if(this.notifyListener)
 	    		  this.listener.SSIteration(i, a, r, jacobianSymbol);
@@ -98,8 +98,9 @@ public class Solovay_Strassen
 	        { 
 	        	if(this.notifyListener)
 	        	{
-	        		this.listener.RNotEqualJacobianModeN();
+	        		this.listener.RNotEqualJacobianModN();
 	        		this.listener.SSIteration(i, a, r, jacobianSymbol);
+	        		this.listener.isPrime(false);
 	        	}
 	    	    isprime = false;
 		        return isprime;
@@ -114,22 +115,5 @@ public class Solovay_Strassen
     	return isprime;
 	}
 
-
-	
-	 public static void main(String[] args) {
-		
-		Solovay_Strassen ss = new Solovay_Strassen();
-		AKS _aks = new AKS();
-		 
-		boolean ans;
-		//ans = ss.isPrime(new BigInteger("36653"), 30);
-	//	ans = ss.isPrime(new BigInteger("971034308087215866439841492479664676774419087718205580112757800346489383481"), 30);
-		ans = _aks.isPrime(new BigInteger("1279"));
-	//  ans = _aks.isPrime(new BigInteger("66241160488780141071579864797"));
-		
-		
-		
-		System.out.println(ans);
-		}
 	
 }
